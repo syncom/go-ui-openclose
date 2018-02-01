@@ -23,10 +23,10 @@ func set_state(sta int) (string, bool) {
     var script string
     var outstr string
     if current_state == 0 {
-        outstr = "Data cloaking failed"
+        outstr = "Data uncloaking failed"
         script = uncloak_script
     } else if current_state == 1 {
-        outstr = "Data uncloaking failed"
+        outstr = "Data cloaking failed"
         script = cloak_script
     } else {
         panic("Impossible state encountered. Parallel universe?")
