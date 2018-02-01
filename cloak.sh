@@ -12,8 +12,6 @@ NS2_MOUNT_POINT=/mnt/nvme2
 COMMAND="nvme admin-passthru ${VISIBLE_DRIVE} -o 0xC1 -n 1 "\
 "--cdw11=1 --cdw10=8 -l 512 -i ${TOKEN_FILE} -w -s"
 
-echo $COMMAND
-
 eval ${COMMAND} > /dev/null 2>&1 || exit 1
 sleep 2
 umount ${NS1_MOUNT_POINT} > /dev/null 2>&1
