@@ -15,14 +15,14 @@ COMMAND="nvme admin-passthru ${VISIBLE_DRIVE} -o 0xC1 -n 1 "\
 echo $COMMAND
 
 eval ${COMMAND} > /dev/null 2>&1 || exit 1
-sleep 1
+sleep 2
 umount ${NS1_MOUNT_POINT} > /dev/null 2>&1
 umount ${NS2_MOUNT_POINT} > /dev/null 2>&1
-sleep 1
+sleep 2
 rmmod nvme > /dev/null 2>&1 || exit 3
-sleep 1
+sleep 20
 insmod ${NVME_KO} > /dev/null 2>&1 || exit 4
-sleep 1
+sleep 2
 mount ${VISIBLE_DRIVE} ${NS1_MOUNT_POINT} > /dev/null 2>&1 || exit 5
 
 echo "Data cloaked"
