@@ -2,12 +2,11 @@ package main
 
 import (
 	"github.com/andlabs/ui"
-        "os"
-        "os/exec"
-        "log"
-        "path/filepath"
+	"log"
+	"os"
+	"os/exec"
+	"path/filepath"
 )
-
 
 // Global variables
 var appname = "数据隐身衣"
@@ -22,33 +21,33 @@ var current_state = 0 // Hidden area closed by default
 // sta: 0 - close hidden area
 //      1 - open hidden area
 func set_state(sta int) (string, bool) {
-    status := false
-    var script string
-    var outstr string
-    if current_state == 0 {
-        outstr = "Data uncloaking failed"
-        script = uncloak_script
-    } else if current_state == 1 {
-        outstr = "Data cloaking failed"
-        script = cloak_script
-    } else {
-        panic("Impossible state encountered. Parallel universe?")
-    }
-    outbytes, err := exec.Command(script).Output()
-    if err != nil {
-        log.Print(err)
-    } else {
-        outstr = string(outbytes[:])
-        status = true
-    }
-    return outstr, status
+	status := false
+	var script string
+	var outstr string
+	if current_state == 0 {
+		outstr = "Data uncloaking failed"
+		script = uncloak_script
+	} else if current_state == 1 {
+		outstr = "Data cloaking failed"
+		script = cloak_script
+	} else {
+		panic("Impossible state encountered. Parallel universe?")
+	}
+	outbytes, err := exec.Command(script).Output()
+	if err != nil {
+		log.Print(err)
+	} else {
+		outstr = string(outbytes[:])
+		status = true
+	}
+	return outstr, status
 }
 
 func main() {
-        state_text := map[int] string{
-            0: button_text0,
-            1: button_text1,
-        }
+	state_text := map[int]string{
+		0: button_text0,
+		1: button_text1,
+	}
 	err := ui.Main(func() {
 		button := ui.NewButton(state_text[current_state])
 		greeting := ui.NewLabel("")
@@ -59,12 +58,12 @@ func main() {
 		window.SetMargined(true)
 		window.SetChild(box)
 		button.OnClicked(func(*ui.Button) {
-                        out, status := set_state(1-current_state)
+			out, status := set_state(1 - current_state)
 			greeting.SetText(out)
-                        if status == true {
-                            current_state = 1 - current_state
-                            button.SetText(state_text[current_state])
-                        }
+			if status == true {
+				current_state = 1 - current_state
+				button.SetText(state_text[current_state])
+			}
 		})
 		window.OnClosing(func(*ui.Window) bool {
 			ui.Quit()
