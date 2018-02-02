@@ -11,6 +11,9 @@ import (
 
 // Global variables
 var appname = "数据隐身衣"
+var button_text0 = "显形(Uncloak)"
+var button_text1 = "隐身(Cloak)"
+
 var dir, _ = filepath.Abs(filepath.Dir(os.Args[0]))
 var cloak_script = filepath.Join(dir, "cloak.sh")
 var uncloak_script = filepath.Join(dir, "uncloak.sh")
@@ -43,8 +46,8 @@ func set_state(sta int) (string, bool) {
 
 func main() {
         state_text := map[int] string{
-            0: "Uncloak",
-            1: "Cloak",
+            0: button_text0,
+            1: button_text1,
         }
 	err := ui.Main(func() {
 		button := ui.NewButton(state_text[current_state])
