@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"time"
 )
 
 // Global variables
@@ -54,16 +55,20 @@ func main() {
 		box := ui.NewVerticalBox()
 		box.Append(button, false)
 		box.Append(greeting, false)
-		window := ui.NewWindow(appname, 162, 100, false)
+		window := ui.NewWindow(appname, 180, 100, false)
 		window.SetMargined(true)
 		window.SetChild(box)
 		button.OnClicked(func(*ui.Button) {
-			out, status := set_state(1 - current_state)
-			greeting.SetText(out)
-			if status == true {
-				current_state = 1 - current_state
-				button.SetText(state_text[current_state])
-			}
+			greeting.SetText("Processing...")
+			go func() {
+				time.Sleep(time.Second)
+				out, status := set_state(1 - current_state)
+				greeting.SetText(out)
+				if status == true {
+					current_state = 1 - current_state
+					button.SetText(state_text[current_state])
+				}
+			}()
 		})
 		window.OnClosing(func(*ui.Window) bool {
 			ui.Quit()
