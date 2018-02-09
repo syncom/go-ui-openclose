@@ -10,4 +10,15 @@ as follows.
 - Hidden namespace is /dev/nvme0n2, and formatted in ext4
 - hidden namespace's mount point /mnt/nvme2 exists, but NOT mounted
 
+# Install dependencies
+On Ubuntu (tested version 16.04), do 
+```
+sudo apt-get install build-essential libgtk-3-dev
+go get github.com/andlabs/ui
+```
+# Build GUI application
+Use `make build` or simple `make` to build the GUI.
+
+# Run GUI application
+
 Run `./openclose` as root.
