@@ -16,6 +16,17 @@ On Ubuntu (tested version 16.04), do
 sudo apt-get install build-essential libgtk-3-dev
 go get github.com/andlabs/ui
 ```
+
+On 64-bit Windows 10, install [Git](https://git-scm.com/download/win), and
+[go1.9.3](https://dl.google.com/go/go1.9.3.windows-amd64.msi), then
+
+```
+go get github.com/andlabs/ui
+```
+Note that to make it work smoothly it is important to stick to go1.9.3.
+The current stable Windows versions go1.9.4 and go1.8.7 have a bug that
+prevents the go get from being succeed.
+
 # Build GUI application
 Use `make build` or simple `make` to build the GUI.
 
